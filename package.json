@@ -1,0 +1,102 @@
+{
+  "name": "@mck-p/graphql-server",
+  "version": "0.0.0-development",
+  "description": "A GraphQL application boilerplate",
+  "main": "server.js",
+  "author": "Tim Roberts <tim@mck-p.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "cross-env": "^5.1.3",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.12.3",
+    "pm2": "^2.9.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.0.6",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "compression-webpack-plugin": "^1.1.3",
+    "concurrently": "^3.5.1",
+    "cors": "^2.8.4",
+    "css-loader": "^0.28.8",
+    "dotenv": "^4.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "favicons-webpack-plugin": "^0.0.7",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "husky": "^0.14.3",
+    "jest": "^22.0.6",
+    "lint-staged": "^6.0.0",
+    "material-ui": "^1.0.0-beta.28",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.11",
+    "postcss-loader": "^2.0.10",
+    "precss": "^2.0.0",
+    "preload-webpack-plugin": "^2.2.0",
+    "prettier-standard": "^8.0.0",
+    "ramda": "^0.25.0",
+    "react-hot-loader": "^4.0.0-beta.14",
+    "rxjs": "^5.5.6",
+    "script-ext-html-webpack-plugin": "^1.8.8",
+    "style-ext-html-webpack-plugin": "^3.4.6",
+    "style-loader": "^0.19.1",
+    "svg-inline-loader": "^0.8.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "scripts": {
+    "clean": "rimraf ./public",
+    "start:prod": "pm2 start config/pm2.config.prod.yml",
+    "start:stage": "pm2 start config/pm2.config.stage.yml",
+    "start": "yarn clean && yarn build:f && yarn start:prod",
+    "dev:s": "cross-env NODE_PATH=./ nodemon -r dotenv/config server/index.js dotenv_config_path=config/.env.server",
+    "dev:f": "nodemon --watch config/ --exec \"webpack-dev-server --config config/webpack.dev.js --progress --colors\"",
+    "dev": "concurrently --kill-others  --names \"client,server\" \"yarn dev:f\" \"yarn dev:s\"",
+    "build:f": "cross-env NODE_PATH=./ webpack --config config/webpack.prod.js --progress --colors",
+    "test:f": "jest --config config/jest.front.js --notify",
+    "test:f:w": "jest --config config/jest.front.js --notify --watch",
+    "test:s": "echo \"Set this up!\" && exit 0;",
+    "test": "yarn test:f && yarn test:s",
+    "coverage:f": "jest --config config/jest.front.js --coverage",
+    "coverage:s": "echo \"Set this up!\" && exit 0;",
+    "coverage": "yarn coverage:f && yarn coverage:s",
+    "format:f": "lint-staged",
+    "format:s": "prettier-standard server/**/*.js",
+    "format": "yarn format:f",
+    "precommit": "yarn format",
+    "prepush": "yarn test"
+  },
+  "lint-staged": {
+    "client/**/*.js": [
+      "prettier-standard",
+      "git add"
+    ]
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          "./config/babel.front.js"
+        ]
+      }
+    }
+  },
+  "repository": "git@github.com:mck-p/graphql-spa-boilerplate.git"
+}

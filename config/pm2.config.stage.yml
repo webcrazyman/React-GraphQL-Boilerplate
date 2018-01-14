@@ -1,0 +1,7 @@
+apps:
+  - script   : server/index.js
+    instances: 4
+    exec_mode: cluster
+    env:
+      NODE_ENV: staging
+      NODE_PATH: ./
