@@ -183,3 +183,15 @@ Files are server from this folder structure, with `index.html` being `/` and all
 ### server
 
 A place to connect the Database to GraphQL, along with serving static files ( Front-End ) and adding the Schema to `express`.
+
+## Setting Up Travis CI
+
+1. Go to [`Travis CI`](https://travis-ci.org/) and sign in.
+2. Hover over your icon and click `Accounts` or go to `http://travis-ci.org/profile/[username].
+3. Find the repo that you are wanting to connect `Travis` to. If you do not see it, try `Sync Accounts`. If you are using an `organization` repo, there are extra steps.
+4. Click the `x` icon next to the repo that you want to add Travis to.
+5. In the Github repo, go to `Settings`, and click `Integrations` then add one and click/type `Travis`.
+6. Create a new PR and push to the selected repo with a `travis.yml` file.
+    - If you mess up, try editing a file and pushing to the PR branch.
+7. Now in the PR, you should see a `Pending` status for `Travis CI`. It will tell you what happens on Travis.
+8. If you want to add a rule where you cannot merge unless..., you can go `Branches`, from `Settings` in Github. Add the branch you want rules on with `choose branch`. Add rules/integrations.
