@@ -58,7 +58,8 @@ $ yarn dev:s // Server only
   - Test both Server/Client code
 * [Travis CI](https://travis-ci.org/)
   - Basic TravisCI support. Depends on you setting up your repo for it
-
+* [Graphiql](https://github.com/graphql/graphiql)
+  - For exploring and building GraphQL APIs
 
 ## Script Overview
 

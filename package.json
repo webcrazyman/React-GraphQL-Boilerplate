@@ -66,7 +66,7 @@
     "start:prod": "pm2 start config/pm2.config.prod.yml",
     "start:stage": "pm2 start config/pm2.config.stage.yml",
     "start": "yarn clean && yarn build:f && yarn start:prod",
-    "dev:s": "cross-env NODE_PATH=./ nodemon -r dotenv/config server/index.js dotenv_config_path=config/.env.server",
+    "dev:s": "cross-env NODE_PATH=./ nodemon -r dotenv/config server/index.js dotenv_config_path=config/.env.server --watch /server",
     "dev:f": "nodemon --watch config/ --exec \"webpack-dev-server --config config/webpack.dev.js --progress --colors\"",
     "dev": "concurrently --kill-others  --names \"client,server\" \"yarn dev:f\" \"yarn dev:s\"",
     "build:f": "cross-env NODE_PATH=./ webpack --config config/webpack.prod.js --progress --colors",

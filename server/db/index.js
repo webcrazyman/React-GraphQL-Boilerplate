@@ -1,8 +1,18 @@
 const { v4: uuid } = require('uuid')
 
 const DUMMY_DATA_BASE = {
-  users: [],
-  posts: []
+  users: [
+    {
+      name: 'John',
+      _id: '2'
+    }
+  ],
+  posts: [
+    {
+      title: 'Other',
+      _id: '1'
+    }
+  ]
 }
 
 module.exports = {
