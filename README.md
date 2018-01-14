@@ -2,6 +2,7 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/mck-p/graphql-spa-boilerplate.svg?branch=master)](https://travis-ci.org/mck-p/graphql-spa-boilerplate)
+[![Coverage Status](https://coveralls.io/repos/github/mck-p/graphql-spa-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/mck-p/graphql-spa-boilerplate?branch=master)
 
 ## Overview
 
@@ -195,3 +196,14 @@ A place to connect the Database to GraphQL, along with serving static files ( Fr
     - If you mess up, try editing a file and pushing to the PR branch.
 7. Now in the PR, you should see a `Pending` status for `Travis CI`. It will tell you what happens on Travis.
 8. If you want to add a rule where you cannot merge unless..., you can go `Branches`, from `Settings` in Github. Add the branch you want rules on with `choose branch`. Add rules/integrations.
+
+## Setting Up Coveralls
+
+1. Go to [`Coveralls`](https://coveralls.io)
+2. Sign in
+3. Click `Add Repo`.
+4. Follow similar setup to `Travis CI`.
+5. Ensure that you have the correct path set for `coverageDirectory` and that that directory is created due to permission issues on different OS's.
+6. Create new PR.
+7. You should see that `Coveralls` is commenting on the PR just like `Travis CI` is.
+8. Follow the directions for `Travis CI` to add `Coveralls` checks to branch merges.

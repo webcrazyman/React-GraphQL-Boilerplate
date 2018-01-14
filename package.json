@@ -7,6 +7,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "coveralls": "^3.0.0",
     "cross-env": "^5.1.3",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
@@ -81,7 +82,9 @@
     "format:s": "prettier-standard server/**/*.js",
     "format": "yarn format:f",
     "precommit": "yarn format",
-    "prepush": "yarn test"
+    "prepush": "yarn test",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "ci": "yarn coverage && yarn coveralls"
   },
   "lint-staged": {
     "client/**/*.js": [

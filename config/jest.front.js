@@ -13,5 +13,9 @@ module.exports = {
   moduleDirectories: [
     "node_modules",
     'shared'
-  ]
+  ],
+  collectCoverageFrom: [
+    '**/*.js'
+  ],
+  coverageDirectory: resolve(__dirname, '..', 'coverage')
 }
