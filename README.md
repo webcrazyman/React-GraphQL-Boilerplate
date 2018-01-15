@@ -6,7 +6,7 @@
 
 ## Overview
 
-This is the McKendri-Phillips' 2018 GraphQL SPA boilerplate. Out of the box support for `build` and `production` scripts. 
+This is the McKendrie-Phillips' 2018 GraphQL SPA boilerplate. Out of the box support for `build` and `production` scripts. 
 
 ## Usage
 
