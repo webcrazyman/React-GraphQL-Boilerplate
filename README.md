@@ -20,6 +20,16 @@ $ yarn
 $ yarn start
 ```
 
+To start as a fresh `git` repository, run the following commands:
+
+```
+$ rm -rf .git
+
+$ git init
+```
+
+This will create a new `git` tree and allow you to add your own repo as the base.
+
 ## Development
 
 ```
