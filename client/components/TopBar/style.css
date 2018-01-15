@@ -1,0 +1,17 @@
+.appBar {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.menuIcon {
+  font-size: 2.15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  flex-grow: 2;
+  padding-left: 1rem;
+}

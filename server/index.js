@@ -42,8 +42,14 @@ app.use('/graphql', graphqlHTTP({
   pretty: true
 }))
 
+const PUBLIC_DIR = resolve(__dirname, '..', 'public')
+
 // Serve static files from the `public` dir
-app.use(express.static(resolve(__dirname, '..', 'public')))
+app.use(express.static(PUBLIC_DIR))
+
+app.get('*', function (request, response) {
+  response.sendFile(resolve(PUBLIC_DIR, 'index.html'))
+})
 
 // Start the server
 app.listen(process.env.PORT, () => {

@@ -1,13 +1,14 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
-const Routes = () => (
-  <Router>
-    <Switch>
-      <Route exact path='/' render={() => <h2>Hello!</h2>} />
-      <Route render={() => <h2>good bye!</h2>} />
-    </Switch>
-  </Router>
+import * as Screens from './screens'
+
+const Routes = props => (
+  <Switch>
+    <Route exact path='/' component={Screens.Dashboard} />
+    <Route path='/updates' render={() => <div>HJello from updates1</div>} />
+    <Route render={() => <h2>good bye!</h2>} />
+  </Switch>
 )
 
 export default Routes

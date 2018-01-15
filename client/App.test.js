@@ -6,6 +6,6 @@ describe('App', () => {
   it('renders a Button', () => {
     const wrapper = shallow(<App />)
 
-    expect(wrapper.find('WithStyles(Button)').length).toBe(1)
+    expect(wrapper.find('WithStyles(TopBar)').length).toBe(1)
   })
 })
