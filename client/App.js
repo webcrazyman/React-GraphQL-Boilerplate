@@ -5,7 +5,7 @@ import Button from 'material-ui/Button'
 import styles from './App.css'
 import { gql } from '_graph'
 
-import logo from '_img/logo'
+import logo from '_img/logo.jpg'
 
 const query = gql('http://localhost:5000/graphql')
 
@@ -14,12 +14,13 @@ class App extends Component {
     users: []
   }
 
-  componentDidMount() {
-    this.fetchLatest()
+  componentDidMount () {
+    // this.fetchLatest()
   }
 
-  fetchLatest = () => query({
-    query: `
+  fetchLatest = () =>
+    query({
+      query: `
       query {
         users {
           name,
@@ -27,7 +28,7 @@ class App extends Component {
         }
       }
     `
-  }).then(({ data }) => this.setState({ users: data.users }))
+    }).then(({ data }) => this.setState({ users: data.users }))
 
   addUser = () =>
     query({
@@ -44,13 +45,15 @@ class App extends Component {
       }
     }).then(this.fetchLatest)
 
-  render() {
+  render () {
     const { users } = this.state
     return (
       <div className={styles.app}>
         <img src={logo} alt='Logo' />
         <h2>Total Users: {users.length}</h2>
-        <Button color='primary' onClick={this.addUser}>You can click me!</Button>
+        <Button color='primary' onClick={this.addUser}>
+          You can click me!
+        </Button>
         <Routes />
       </div>
     )
