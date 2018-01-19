@@ -1,30 +1,25 @@
 const { v4: uuid } = require('uuid')
+const data = require('./dummy.json')
+const DataLoader = require('dataloader')
 
-const DUMMY_DATA_BASE = {
-  users: [
-    {
-      name: 'John',
-      _id: '2'
-    }
-  ],
-  posts: [
-    {
-      title: 'Other',
-      _id: '1'
-    }
-  ]
-}
-
-module.exports = {
+const db = {
   get: (key, id) => id
-    ? Object.assign({}, DUMMY_DATA_BASE[key].find(({ _id }) => id === _id))
-    : [...DUMMY_DATA_BASE[key]],
+    ? Object.assign({}, data[key].find(({ _id }) => id === _id))
+    : [...data[key]],
+  batchGet: (key, ids) => data[key].filter(({ _id }) => ids.indexOf(_id) > -1),
   save: (key, data) => {
     const _id = uuid()
     const withID = Object.assign({}, data, { _id })
-    DUMMY_DATA_BASE[key].push(withID)
+    data[key].push(withID)
 
     return withID
   },
-  delete: (key, id) => DUMMY_DATA_BASE[key] = DUMMY_DATA_BASE[key].filter(({ _id }) => id !== _id)
+  delete: (key, id) => data[key] = data[key].filter(({ _id }) => id !== _id)
 }
+const loaders = {
+  users: new DataLoader(async ids => await db.batchGet('users', ids)),
+  posts: new DataLoader(async ids => await db.batchGet('posts', ids)),
+  comments: new DataLoader(async ids => await db.batchGet('comments', ids))
+}
+
+module.exports = Object.assign(db, loaders)

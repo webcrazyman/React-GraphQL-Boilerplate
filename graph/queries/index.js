@@ -1,17 +1,14 @@
-const { GraphQLString, GraphQLObjectType } = require('graphql')
-const UserQueries = require('./users')
+const userQueries = require('./users')
+const postQueries = require('./posts')
+const commentQueries = require('./comments')
 
-const query = new GraphQLObjectType({
-  name: 'RootQueryType',
-  fields: () => ({
-    hello: {
-      type: GraphQLString,
-      resolve() {
-        return 'world'
-      }
-    },
-    ...UserQueries
-  })
-})
+const query = `
+type Query {
+  hello: String
+  ${userQueries}
+  ${postQueries}
+  ${commentQueries}
+}
+`
 
 module.exports = query

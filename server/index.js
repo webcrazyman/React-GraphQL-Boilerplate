@@ -1,15 +1,16 @@
 // NPM/Node deps
 const { resolve } = require('path')
 const express = require('express')
+const helmet = require('helmet')
 const graphqlHTTP = require('express-graphql')
-
+const { makeExecutableSchema } = require('graphql-tools')
 /**
  * NODE_PATH=./
  */
 // Our global utililites
 const utils = require('utilities')
 // our GraphQL entry
-const RootSchema = require('graph/schema')
+const { schema, resolvers } = require('graph')
 // Some DB
 const DB = require('./db')
 
@@ -27,16 +28,19 @@ if (!utils.isProduction()) {
   // And add some middleware to make life easier
   app.use(require('cors')())
   app.use(require('morgan')('dev'))
+} else {
+  app.use(helmet())
 }
 
 // Register GraphQL
 app.use('/graphql', graphqlHTTP({
-  schema: RootSchema,
+  schema: makeExecutableSchema({
+    typeDefs: schema,
+    resolvers
+  }),
   graphiql: true,
-  // Let `resolve` methods have access
-  // to the DB
-  rootValue: {
-    DB
+  context: {
+    db: DB
   },
   // And pretty-print the JSON
   pretty: true
@@ -47,6 +51,8 @@ const PUBLIC_DIR = resolve(__dirname, '..', 'public')
 // Serve static files from the `public` dir
 app.use(express.static(PUBLIC_DIR))
 
+// Resolve all other requests that I have not
+// handled above with index.html
 app.get('*', function (request, response) {
   response.sendFile(resolve(PUBLIC_DIR, 'index.html'))
 })

@@ -7,9 +7,12 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "dataloader": "^1.3.0",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
     "graphql": "^0.12.3",
+    "graphql-tools": "^2.18.0",
+    "helmet": "^3.9.0",
     "pm2": "^2.9.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -36,6 +39,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "faker": "^4.1.0",
     "favicons-webpack-plugin": "^0.0.7",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
@@ -68,7 +72,7 @@
     "start:prod": "pm2 start config/pm2.config.prod.yml",
     "start:stage": "pm2 start config/pm2.config.stage.yml",
     "start": "yarn clean && yarn build:f && yarn start:prod",
-    "dev:s": "cross-env NODE_PATH=./ nodemon -r dotenv/config server/index.js dotenv_config_path=config/.env.server --watch /server",
+    "dev:s": "cross-env NODE_PATH=./ nodemon --watch server/ --watch graph/ -r dotenv/config server/index.js dotenv_config_path=config/.env.server",
     "dev:f": "nodemon --watch config/ --exec \"webpack-dev-server --config config/webpack.dev.js --progress --colors\"",
     "dev": "concurrently --kill-others  --names \"client,server\" \"yarn dev:f\" \"yarn dev:s\"",
     "build:f": "cross-env NODE_PATH=./ webpack --config config/webpack.prod.js --progress --colors",
@@ -85,7 +89,8 @@
     "precommit": "yarn format",
     "prepush": "yarn test",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "ci": "yarn coverage && yarn coveralls"
+    "ci": "yarn coverage && yarn coveralls",
+    "init-db": "node server/db/initDummyDB.js"
   },
   "lint-staged": {
     "client/**/*.js": [

@@ -1,17 +1,10 @@
-const { GraphQLString, GraphQLObjectType } = require('graphql')
-const UserMutations = require('./users')
+const userMutations = require('./users')
 
-const mutation = new GraphQLObjectType({
-  name: 'RootMutationsType',
-  fields: () => ({
-    hello: {
-      type: GraphQLString,
-      resolve() {
-        return 'world'
-      }
-    },
-    ...UserMutations
-  })
-})
+const mutations = `
+  type Mutation {
+    hello: String
+    ${userMutations}
+  }
+`
 
-module.exports = mutation
+module.exports = mutations
